@@ -2,6 +2,7 @@ package com.masnun.controllers;
 
 
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -12,8 +13,9 @@ import java.net.URL;
 import java.net.URLDecoder;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.ResourceBundle;
 
-public class MainController {
+public class MainController implements Initializable{
 
     @FXML
     private WebView webView;
@@ -21,14 +23,6 @@ public class MainController {
     private Button playButton;
     @FXML
     private TextField urlInput;
-
-    @FXML
-    public void initialize() {
-        String welcomeHtmlPath = getClass().getClassLoader().getResource("welcome.html").toExternalForm();
-        webView.getEngine().load(welcomeHtmlPath);
-
-        urlInput.setText("https://www.youtube.com/watch?v=mQD4zr4GlZg");
-    }
 
     @FXML
     protected void handlePlayButtonClick(MouseEvent event) throws Exception {
@@ -56,5 +50,12 @@ public class MainController {
             query_pairs.put(URLDecoder.decode(pair.substring(0, idx), "UTF-8"), URLDecoder.decode(pair.substring(idx + 1), "UTF-8"));
         }
         return query_pairs;
+    }
+
+    public void initialize(URL location, ResourceBundle resources) {
+        String welcomeHtmlPath = getClass().getClassLoader().getResource("welcome.html").toExternalForm();
+        webView.getEngine().load(welcomeHtmlPath);
+
+        urlInput.setText("https://www.youtube.com/watch?v=mQD4zr4GlZg");
     }
 }
